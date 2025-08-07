@@ -152,6 +152,19 @@ curl -X POST "http://localhost:8000/hackrx/run" \
 - **`requirements.txt`** - All Python dependencies
 
 
+## 👩‍💻 Team
+
+| Name                | GitHub Profile                                           |
+| ------------------- | -------------------------------------------------------- |
+| **Sowmya Kurapati** | [@SowmyaKurapati26](https://github.com/SowmyaKurapati26) |
+| **Lahari Gurram**   | [@gurram-lahari](https://github.com/gurram-lahari)       |
+
+<div align="center">
+
+Built with 💡, ☕, and plenty of API calls.
+
+</div>
+
 <div align="center">
 
 **🚀 Built for Bajaj HackRx 2025 - Universal LLM Document Processing**

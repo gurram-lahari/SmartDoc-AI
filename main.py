@@ -77,11 +77,7 @@ class QueryRequest(BaseModel):
     questions: List[str] = Field(..., description="List of questions to ask about the document", example=["What is the main topic?", "Who are the key stakeholders?"])
     
 class AnalysisResponse(BaseModel):
-    success: bool = Field(description="Whether the analysis was successful")
-    document_info: Dict[str, Any] = Field(description="Metadata about the processed document")
     answers: List[str] = Field(description="AI-generated answers to your questions")
-    processing_time: float = Field(description="Time taken to process the request (in seconds)")
-    model_used: str = Field(description="AI model used for generating answers")
 
 
 # --- API Endpoints ---
@@ -103,9 +99,9 @@ class AnalysisResponse(BaseModel):
          - Policy document Q&A
          - Educational content exploration
          """,
-         response_description="AI-generated answers with document metadata",
+         response_description="Array of AI-generated answers to your questions",
          tags=["🎯 Core AI Analysis"])
-async def analyze_document(request_data: QueryRequest) -> Dict[str, Any]:
+async def analyze_document(request_data: QueryRequest) -> List[str]:
     """
     **🚀 Main Analysis Endpoint**
     
@@ -126,21 +122,9 @@ async def analyze_document(request_data: QueryRequest) -> Dict[str, Any]:
             # If the logic file returns an error, pass it to the client
             raise HTTPException(status_code=400, detail=results["error"])
         
-        # Add processing metadata
-        processing_time = time.time() - start_time
-        enhanced_results = {
-            "success": True,
-            "document_info": {
-                "source_url": request_data.documents,
-                "questions_processed": len(request_data.questions),
-                "processing_time_seconds": round(processing_time, 2)
-            },
-            "model_used": "Gemini 2.5 Flash + FAISS Vector Search",
-            **results
-        }
-            
-        print(f"✅ Successfully processed request in {processing_time:.2f}s")
-        return enhanced_results
+        # Return only the answers array in a clean format
+        print(f"✅ Successfully processed request in {time.time() - start_time:.2f}s")
+        return results.get("answers", [])
 
     except Exception as e:
         # Catch any other unexpected errors

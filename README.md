@@ -159,11 +159,6 @@ curl -X POST "http://localhost:8000/hackrx/run" \
 | **Sowmya Kurapati** | [@SowmyaKurapati26](https://github.com/SowmyaKurapati26) |
 | **Lahari Gurram**   | [@gurram-lahari](https://github.com/gurram-lahari)       |
 
-<div align="center">
-
-Built with 💡, ☕, and plenty of API calls.
-
-</div>
 
 <div align="center">
 
